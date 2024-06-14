@@ -1,0 +1,14 @@
+
+.taskListContainer {
+  max-height: calc(100vh - var(--header-height) - var(--tabBar-height) - var(--actions-height)); 
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.taskContainer {
+  align-items: center;
+  position: relative;
+  width: 100%;
+}

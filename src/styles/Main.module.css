@@ -1,0 +1,20 @@
+.MainContainer {
+  display: flex; 
+  flex-direction: column; 
+  height: 100vh; 
+}
+
+.content {
+  display: flex; 
+  flex-direction: row; 
+  flex-grow: 1; 
+}
+
+.Sidebar {
+  width: 464px; 
+  flex-shrink: 0; 
+}
+
+.DisplayPanel {
+  flex-grow: 1; 
+}

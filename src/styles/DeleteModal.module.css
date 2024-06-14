@@ -1,0 +1,62 @@
+  .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .deleteModalContainer {
+    position: relative;
+    width: 496px;
+    height: 170px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .deleteModalContainer .task {
+    position: absolute;
+    width: 466px; height: 25px;
+    padding: 10px 15px;
+    background: #2C3E50;
+    border-radius: 20px 20px 0px 0px;
+    font-size: 15px;
+    color: #FFFFFF;
+  }
+  
+  .deleteModalContainer .content {
+    position: absolute;
+    width: 423px; height: 23px;
+    left: 50px; top: 50px;
+    font-size: 20px;
+    color: #000000;
+  }
+  
+  .deleteModalContainer .yes {
+    position: absolute;
+    width: 248px; height: 46px;
+    left: 0px; top: 124px;
+    background: #000000;
+    border: #000000;
+    border-radius: 0px 0px 0px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #FFFFFF;
+  }
+  
+  .deleteModalContainer .no {
+    position: absolute;
+    width: 248px; height: 46px;
+    left: 248px; top: 124px;
+    background: #979797;
+    border: #979797;
+    border-radius: 0px 0px 20px 0px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #FFFFFF;
+  }
+  

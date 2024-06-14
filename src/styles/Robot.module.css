@@ -1,0 +1,109 @@
+  .robotContainer {
+    position: relative;
+    width: 447px;
+    height: 102px;
+    background: #F9F9F9;
+  }
+
+  .robotIdBox {
+    position: absolute;
+    width: 153px; height: 22px;
+    top: 0; left: 0;
+    background: #2C3E50;
+  }
+  
+  .robotIdText {
+    position: absolute;
+    width: 40px; height: 14px;
+    top: 0; left: 7px;
+    margin: 1px;
+    color: #FFFFFF;
+  }
+
+  .modeCon {
+    position: absolute;
+    width: 153px; height: 80px;
+    top: 20px; left: 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    background: #18283B;
+  }
+  
+  .modeText {
+    font-size: 20px;
+    color: #FFFFFF;
+  }
+
+  .typeText {
+    position: absolute;
+    width: 153px; height: 14px;
+    left: 175px;
+    font-size: 15px;
+    color: #000000;
+  }
+
+  .batteryImg {
+    position: absolute;
+    left: 383px; top: 70px;
+  }
+
+  .batteryText {
+    position: absolute;
+    width: 21px; height: 14px;
+    left: 395px; top: 60px;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+  }
+
+  .barBack {
+    position: absolute;
+    width: 235px; height: 0;
+    left: 175px; top: 10px;
+    border: 9px solid #a1a1a18a;
+    border-radius: 6px;
+  }
+
+  .progressBar {
+    position: absolute;
+    height: 0;
+    left: -9px; top: -9px;
+    border: 9px solid #1d1db1;
+  }
+
+  .progressBar p {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: #ffffff;
+  }
+
+  .task {
+    position: absolute;
+    width: 153px; height: 14px;
+    left: 175px; top: 36px;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+  }
+
+  .goalNode {
+    position: absolute;
+    width: 127px; height: 12px;
+    left: 175px; top: 54px;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+  }
+
+  .boldText {
+    display: inline-block;
+    min-width: 80px;
+    font-weight: bold;
+  }
+  
+  .valueText {
+    margin-left: 8px;
+  }

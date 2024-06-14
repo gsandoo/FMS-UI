@@ -1,0 +1,11 @@
+header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 70px;  
+  background-color: #18283B; 
+  color: #fff; 
+  padding: 0 30px; 
+  margin: 0 0 5px 0;
+  font-size: large;
+}

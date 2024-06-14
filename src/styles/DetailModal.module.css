@@ -1,0 +1,64 @@
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.detailModalContainer {
+  background-color: #fff;
+  width: 425px;
+  max-height: 450px;
+  min-height: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.detailModalContainer .head {
+  width: 425px;
+  height: 45px;
+  background: #2C3E50;
+  color: #ffffff;
+  border-radius: 8px 8px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detailModalContainer p {
+  margin: 10px 20px;
+}
+
+.detailModalContainer .content {
+  margin: 10px 20px 0px 100px; 
+  padding: 10px 0;
+  font-size: 15px;
+  color: #000000;
+}
+
+.detailModalContainer .element {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px; 
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 11px; right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #aaa;
+}
+
+.close:hover {
+  color: #555;
+}

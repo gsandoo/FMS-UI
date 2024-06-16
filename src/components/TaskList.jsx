@@ -1,19 +1,19 @@
-// TaskList.js
-
 import React from 'react';
 import Task from './Task';
 import styles from '../styles/TaskList.module.css';
 
-function TaskList({ tasks }) {
+const TaskList = ({ tasks, activeFilter }) => {
+  const filteredTasks = activeFilter
+    ? tasks.filter(task => task.status === 'ACTIVE')
+    : tasks;
+
   return (
-    <div className={styles.taskListContainer}>
-      {tasks.map((task, index) => (
-        <div key={index} className={styles.taskContainer}>
-          <Task task={task} />
-        </div>
+    <div className={styles.taskList}>
+      {filteredTasks.map(task => (
+        <Task key={task.id} task={task} />
       ))}
     </div>
   );
-}
+};
 
 export default TaskList;

@@ -9,9 +9,9 @@ const Task = memo(({ task }) => {
   const [deleteModal, openDelete, closeDelete] = useModal();
 
   const renderStatusContent = (statusClassName, statusTextClassName = '') => {
-    const procTimeTextClass = task.status === 'ACTIVE'
+    const procTimeTextClass = (task.status === 'ACTIVE' )
       ? `${styles.procTimeText} ${styles.activeProcText}`
-      : styles.procTimeText;
+      : `${styles.activeProcText}`;
 
     return (
       <>
@@ -26,7 +26,7 @@ const Task = memo(({ task }) => {
             <p className={`${styles.statusText} ${statusTextClassName}`}>{task.status}</p>
           </button>
         </div>
-        {['QUEUED', 'FAILED', 'CANCELED'].includes(task.status) && (
+        {['CHARGING', 'QUEUED', 'FAILED', 'CANCELED'].includes(task.status) && (
           <div className={styles.deleteCon}>
             <button className={styles.deleteButton} onClick={openDelete}><p className={styles.deleteText}>DELETE</p></button>
           </div>
@@ -43,7 +43,7 @@ const Task = memo(({ task }) => {
       <div className={styles.typeCon}>
         <p className={styles.typeText}>{task.type}</p>
       </div>
-      {task.status === 'ACTIVE' && (
+      {(task.status === 'ACTIVE' || task.status === 'CHARGING' || task.status === 'QUEUED' || task.status === 'CANCELED' || task.status === 'PENDING' || task.status === 'COMPLETED' || task.status === 'CHARGED')  && (
         <>
           <div className={styles.robotIdText}>
             <p><span className={styles.boldText}>Robot ID</span><span className={styles.valueText}>{task.robotId}</span></p>
@@ -51,7 +51,7 @@ const Task = memo(({ task }) => {
           {renderStatusContent(styles.activeStatus)}
         </>
       )}
-      {['QUEUED', 'FAILED', 'CANCELED'].includes(task.status) && renderStatusContent(styles.queuedStatus)}
+      {['CHARGING','QUEUED', 'FAILED', 'CANCELED'].includes(task.status) && renderStatusContent(styles.queuedStatus)}
       {['ACTIVE', 'PENDING', 'COMPLETED'].includes(task.status) && renderStatusContent(styles.completeStatus, styles.completeStatusText)}
       
       {showDetails && <DetailModal task={task} onClose={closeDetails} />}

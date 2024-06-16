@@ -2,15 +2,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/DisplayPanel.module.css';
 
 const DisplayPanel = ({ setRobotTimes }) => {
+  const [nodes, setNodes] = useState([]);
   const [robots, setRobots] = useState([]);
+  const [paths, setPaths] = useState([]);
   const canvasRef = useRef(null);
   const robotStartTimeRef = useRef({});
   const finishedRobotTimesRef = useRef({});
 
+  const chargeStation = [
+    { id: 1, x: 1500, y: 100, color: 'green' },
+    { id: 2, x: 1500, y: 130, color: 'green' },
+    { id: 3, x: 1500, y: 160, color: 'green' },
+    { id: 4, x: 1500, y: 190, color: 'green' },
+    { id: 5, x: 1500, y: 220, color: 'green' },
+  ];
+
+  // 가로는 100 단위, 세로는 50단위
   const dummyRobots = [
     {
       id: 'AGF0',
-      path: [{ x: 50, y: 50 }, { x: 100, y: 100 }, { x: 150, y: 50 }, { x: 200, y: 100 }, { x: 250, y: 50 }, { x: 300, y: 100 }],
+      path: [{ x:200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
       color: 'red',
       currentIndex: 0,
       progress: 0,
@@ -18,23 +29,121 @@ const DisplayPanel = ({ setRobotTimes }) => {
     },
     {
       id: 'AGF1',
-      path: [{ x: 60, y: 60 }, { x: 110, y: 110 }, { x: 160, y: 60 }, { x: 210, y: 110 },
-        { x: 260, y: 60 }, { x: 310, y: 110 }, { x: 350, y: 60 }, { x: 330, y: 110 },
-        { x: 60, y: 60 }, { x: 110, y: 110 }, { x: 160, y: 60 }, { x: 330, y: 110 },
-        { x: 60, y: 60 }, { x: 110, y: 110 }, { x: 160, y: 60 }, { x: 330, y: 110 },
-        { x: 60, y: 60 }, { x: 110, y: 110 }, { x: 160, y: 60 }, { x: 330, y: 110 },
-        { x: 60, y: 60 }, { x: 110, y: 110 }, { x: 160, y: 60 }, { x: 330, y: 110 }
+      path: 
+      [
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
+        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 }
       ],
       color: 'blue',
       currentIndex: 0,
       progress: 0,
       finished: false
-    }
+    },
+    {
+      id: 'AGF2',
+      path: [
+        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
+        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
+        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
+      ],
+      color: 'yellow',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+    {
+      id: 'AGF3',
+      path: [
+        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 },
+        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },
+        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },
+      ],
+      color: 'purple',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
   ];
+
+  const dummyPaths = [
+    [
+      // path 1
+      { x: 200, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 },{ x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
+      // path 2
+      { x: 1400, y: 100 }, { x: 1400, y: 130 }, { x: 1500, y: 130 }, 
+      // path 3
+      { x: 1400, y: 130 }, { x: 1400, y: 160 }, { x: 1500, y: 160 },
+      // path 4
+      { x: 1400, y: 160 }, { x: 1400, y: 190 }, { x: 1500, y: 190 }, 
+      // path 5
+      { x: 1400, y: 190 }, { x: 1400, y: 220 }, { x: 1500, y: 220 }, 
+      // path 6
+      { x: 1400, y: 220 }, { x: 1400, y: 130 }, { x: 1300, y: 130 }, { x: 1300, y: 950 }, 
+      // path 7
+      { x: 1300, y: 130 },  { x: 1200, y: 130 },{ x: 1200, y: 950 }, 
+      
+      // path 8 (세로)
+      { x: 1200, y: 130 }, { x: 1100, y: 130 }, { x: 1100, y: 950 },
+      { x: 1100, y: 130 }, { x: 1000, y: 130 }, { x: 1000, y: 950 },
+      { x: 1000, y: 130 }, { x: 900, y: 130 }, { x: 900, y: 950 },
+      { x: 900, y: 130 }, { x: 800, y: 130 }, { x: 800, y: 950 }, 
+      { x: 800, y: 130 }, { x: 700, y: 130 }, { x: 700, y: 950 }, 
+      { x: 700, y: 130 }, { x: 600, y: 130 }, { x: 600, y: 950 }, 
+      { x: 600, y: 130 }, { x: 500, y: 130 }, { x: 500, y: 950 }, 
+      { x: 500, y: 130 }, { x: 400, y: 130 }, { x: 400, y: 950 }, 
+      { x: 400, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 950 }, 
+      { x: 300, y: 130 }, { x: 200, y: 130 }, { x: 200, y: 950 }, 
+      { x: 200, y: 130 }, { x: 100, y: 130 }, { x: 100, y: 950 }, 
+
+      // path 9 (가로)
+      { x: 100, y: 850 }, { x: 1500, y: 850 }, { x: 100, y: 850 },
+      { x: 100, y: 750 }, { x: 1500, y: 750 }, { x: 100, y: 750 },
+      { x: 100, y: 650 }, { x: 1500, y: 650 }, { x: 100, y: 650 },
+      { x: 100, y: 550 }, { x: 1500, y: 550 }, { x: 100, y: 550 },
+      { x: 100, y: 450 }, { x: 1500, y: 450 }, { x: 100, y: 450 },
+      { x: 100, y: 350 }, { x: 1500, y: 350 }, { x: 100, y: 350 },
+      { x: 100, y: 250 }, { x: 1500, y: 250 }, { x: 100, y: 250 },
+      
+      
+      
+
+      
+    ],
+  
+  ];
+
+  const drawNodes = (ctx, nodeSize = 10) => {
+    nodes.forEach(node => {
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, nodeSize, 0, 2 * Math.PI);
+      ctx.fillStyle = node.color;
+      ctx.fill();
+    });
+  };
+  
+  // 로봇 path
+  const drawPaths = (ctx) => {
+    paths.forEach(path => {
+      ctx.beginPath();
+      ctx.moveTo(path[0].x, path[0].y);
+      path.forEach(point => {
+        ctx.lineTo(point.x, point.y);
+      });
+      ctx.strokeStyle = 'grey';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    });
+  };
 
   useEffect(() => {
     const init = async () => {
+      setNodes(chargeStation);
       setRobots(dummyRobots);
+      setPaths(dummyPaths);
       dummyRobots.forEach(robot => {
         robotStartTimeRef.current[robot.id] = Date.now();
       });
@@ -75,9 +184,8 @@ const DisplayPanel = ({ setRobotTimes }) => {
       const ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const drawNodes = () => {
-        // Draw nodes if needed
-      };
+      drawPaths(ctx);
+      drawNodes(ctx);
 
       const drawRobotsAndPaths = () => {
         if (robots) {
@@ -116,7 +224,6 @@ const DisplayPanel = ({ setRobotTimes }) => {
         }
       };
 
-      drawNodes();
       drawRobotsAndPaths();
 
       const newRobotTimes = robots.map(robot => {

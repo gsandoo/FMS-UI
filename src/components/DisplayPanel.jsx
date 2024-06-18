@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../styles/DisplayPanel.module.css';
 
-const DisplayPanel = ({ setRobotTimes }) => {
+const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
   const [nodes, setNodes] = useState([]);
   const [robots, setRobots] = useState([]);
   const [paths, setPaths] = useState([]);
@@ -21,7 +21,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
   const dummyRobots = [
     {
       id: 'AGF0',
-      path: [{ x:200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
       color: 'red',
       currentIndex: 0,
       progress: 0,
@@ -29,15 +29,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
     },
     {
       id: 'AGF1',
-      path: 
-      [
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },
-        {x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 },{x: 1500, y: 250 }
-      ],
+      path: Array.from({ length: 30 }, () => ({ x: 1500, y: 250 })),
       color: 'blue',
       currentIndex: 0,
       progress: 0,
@@ -45,11 +37,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
     },
     {
       id: 'AGF2',
-      path: [
-        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
-        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
-        { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },  { x: 1480, y: 130 },
-      ],
+      path: Array.from({ length: 15 }, () => ({ x: 1480, y: 130 })),
       color: 'yellow',
       currentIndex: 0,
       progress: 0,
@@ -57,11 +45,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
     },
     {
       id: 'AGF3',
-      path: [
-        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 },
-        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },
-        { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },
-      ],
+      path: Array.from({ length: 18 }, () => ({ x: 1480, y: 100 })),
       color: 'purple',
       currentIndex: 0,
       progress: 0,
@@ -72,32 +56,32 @@ const DisplayPanel = ({ setRobotTimes }) => {
   const dummyPaths = [
     [
       // path 1
-      { x: 200, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 },{ x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
+      { x: 200, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 }, { x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
       // path 2
-      { x: 1400, y: 100 }, { x: 1400, y: 130 }, { x: 1500, y: 130 }, 
+      { x: 1400, y: 100 }, { x: 1400, y: 130 }, { x: 1500, y: 130 },
       // path 3
       { x: 1400, y: 130 }, { x: 1400, y: 160 }, { x: 1500, y: 160 },
       // path 4
-      { x: 1400, y: 160 }, { x: 1400, y: 190 }, { x: 1500, y: 190 }, 
+      { x: 1400, y: 160 }, { x: 1400, y: 190 }, { x: 1500, y: 190 },
       // path 5
-      { x: 1400, y: 190 }, { x: 1400, y: 220 }, { x: 1500, y: 220 }, 
+      { x: 1400, y: 190 }, { x: 1400, y: 220 }, { x: 1500, y: 220 },
       // path 6
-      { x: 1400, y: 220 }, { x: 1400, y: 130 }, { x: 1300, y: 130 }, { x: 1300, y: 950 }, 
+      { x: 1400, y: 220 }, { x: 1400, y: 130 }, { x: 1300, y: 130 }, { x: 1300, y: 950 },
       // path 7
-      { x: 1300, y: 130 },  { x: 1200, y: 130 },{ x: 1200, y: 950 }, 
-      
+      { x: 1300, y: 130 }, { x: 1200, y: 130 }, { x: 1200, y: 950 },
+
       // path 8 (세로)
       { x: 1200, y: 130 }, { x: 1100, y: 130 }, { x: 1100, y: 950 },
       { x: 1100, y: 130 }, { x: 1000, y: 130 }, { x: 1000, y: 950 },
       { x: 1000, y: 130 }, { x: 900, y: 130 }, { x: 900, y: 950 },
-      { x: 900, y: 130 }, { x: 800, y: 130 }, { x: 800, y: 950 }, 
-      { x: 800, y: 130 }, { x: 700, y: 130 }, { x: 700, y: 950 }, 
-      { x: 700, y: 130 }, { x: 600, y: 130 }, { x: 600, y: 950 }, 
-      { x: 600, y: 130 }, { x: 500, y: 130 }, { x: 500, y: 950 }, 
-      { x: 500, y: 130 }, { x: 400, y: 130 }, { x: 400, y: 950 }, 
-      { x: 400, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 950 }, 
-      { x: 300, y: 130 }, { x: 200, y: 130 }, { x: 200, y: 950 }, 
-      { x: 200, y: 130 }, { x: 100, y: 130 }, { x: 100, y: 950 }, 
+      { x: 900, y: 130 }, { x: 800, y: 130 }, { x: 800, y: 950 },
+      { x: 800, y: 130 }, { x: 700, y: 130 }, { x: 700, y: 950 },
+      { x: 700, y: 130 }, { x: 600, y: 130 }, { x: 600, y: 950 },
+      { x: 600, y: 130 }, { x: 500, y: 130 }, { x: 500, y: 950 },
+      { x: 500, y: 130 }, { x: 400, y: 130 }, { x: 400, y: 950 },
+      { x: 400, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 950 },
+      { x: 300, y: 130 }, { x: 200, y: 130 }, { x: 200, y: 950 },
+      { x: 200, y: 130 }, { x: 100, y: 130 }, { x: 100, y: 950 },
 
       // path 9 (가로)
       { x: 100, y: 850 }, { x: 1500, y: 850 }, { x: 100, y: 850 },
@@ -107,15 +91,11 @@ const DisplayPanel = ({ setRobotTimes }) => {
       { x: 100, y: 450 }, { x: 1500, y: 450 }, { x: 100, y: 450 },
       { x: 100, y: 350 }, { x: 1500, y: 350 }, { x: 100, y: 350 },
       { x: 100, y: 250 }, { x: 1500, y: 250 }, { x: 100, y: 250 },
-      
-      
-      
-
-      
     ],
-  
+
   ];
 
+   
   const drawNodes = (ctx, nodeSize = 10) => {
     nodes.forEach(node => {
       ctx.beginPath();
@@ -124,8 +104,8 @@ const DisplayPanel = ({ setRobotTimes }) => {
       ctx.fill();
     });
   };
-  
-  // 로봇 path
+
+  // 로봇 path 그리기
   const drawPaths = (ctx) => {
     paths.forEach(path => {
       ctx.beginPath();
@@ -175,6 +155,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
     resizeCanvas();
 
     return () => window.removeEventListener('resize', resizeCanvas);
+ 
   }, []);
 
   useEffect(() => {
@@ -250,7 +231,7 @@ const DisplayPanel = ({ setRobotTimes }) => {
 
               setTimeout(() => {
                 setRobots(prevRobots => prevRobots.filter((_, idx) => idx !== index));
-              }, 10000000);
+              }, 1000); // Here was a large timeout, replaced with a shorter one for testing
             }
           }
         }

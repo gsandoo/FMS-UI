@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import DisplayPanel from "../components/DisplayPanel";
-import RobotStatus from "../components/RobotStatus";
 import styles from "../styles/Main.module.css";
 
 export default function Main() {
   const [robotTimes, setRobotTimes] = useState([]);
-
+  const [deleteRobot, setDeleteRobot] = useState([]);
   return (
     <div className={styles.MainContainer}>
       <Header title='FMS'/>
@@ -18,9 +17,6 @@ export default function Main() {
         <div className={styles.DisplayPanel}>
           <DisplayPanel setRobotTimes={setRobotTimes} /> {/* setRobotTimes를 props로 전달 */}
         </div>
-        {/* <div>
-          <RobotStatus robotTimes={robotTimes} />
-        </div> */}
       </div>
     </div>
   );

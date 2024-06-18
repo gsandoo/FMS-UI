@@ -37,12 +37,18 @@ function Sidebar({ robotTimes = [] }) {
     }
   }, [robotTimes]);
 
+  // Task 삭제 핸들러
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
+
   // 체크박스 상태 변경 핸들러
   const handleActiveCheckboxChange = (e) => setActiveFilter(e.target.checked);
 
   // 렌더링할 콘텐츠 선택
   const renderContent = () => {
-    switch (selectedOption) {
+    switch (selectedOption)      {
       case 'Robot':
         return (
           <div className={styles.robotContent}>
@@ -56,7 +62,7 @@ function Sidebar({ robotTimes = [] }) {
       default:
         return (
           <div className={styles.taskContent}>
-            <TaskList tasks={tasks} activeFilter={activeFilter} />
+            <TaskList tasks={tasks} activeFilter={activeFilter} onDeleteTask={handleDeleteTask} />
             <div className={styles.actions}>
               <label className={styles.checkboxContainer}>
                 <input type="checkbox" checked={activeFilter} onChange={handleActiveCheckboxChange} />
@@ -87,3 +93,4 @@ function Sidebar({ robotTimes = [] }) {
 }
 
 export default Sidebar;
+

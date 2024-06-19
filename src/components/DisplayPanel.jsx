@@ -148,6 +148,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
         canvas.width = rect.width * window.devicePixelRatio;
         canvas.height = rect.height * window.devicePixelRatio;
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        
       }
     };
 

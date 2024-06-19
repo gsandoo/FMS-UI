@@ -53,6 +53,69 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       progress: 0,
       finished: false
     },
+
+    {
+      id: 'AGF4',
+      path: [{ x: 630, y: 130 }, { x: 630, y: 230 }, { x: 430, y: 230 }, { x: 430, y: 500 }, { x: 430, y: 700 }, { x: 800, y: 700 }],
+      color: 'purple',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF5',
+      path: [{ x: 970, y: 860 }, { x: 970, y: 600 }, { x: 450, y: 600 }, { x: 450, y: 300 }, { x: 200, y: 300 }, { x: 200, y: 150 }],
+      color: 'brown',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF6',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF7',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF8',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF9',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF10',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
   ];
 
   const dummyPaths = [
@@ -269,7 +332,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
                 ctx.lineTo(point.x, point.y);
               });
               ctx.strokeStyle = robot.color;
-              ctx.lineWidth = 2;
+              ctx.lineWidth = 4;
               ctx.stroke();
 
               const currentPoint = robot.path[robot.currentIndex];

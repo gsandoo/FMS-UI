@@ -9,7 +9,11 @@ const initialTasks = [
   { id: 'DEL1', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF0', Proc: '' },
   { id: 'DEL2', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF1', Proc: '' },
   { id: 'DEL3', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF2', Proc: '' },
-  { id: 'DEL4', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF3', Proc: '' }
+  { id: 'DEL4', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF3', Proc: '' },
+  { id: 'DEL5', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF4', Proc: '' },
+  { id: 'DEL6', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF5', Proc: '' },
+  { id: 'DEL7', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF6', Proc: '' },
+  { id: 'DEL8', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF7', Proc: '' }
 ];
 
 const robots = [

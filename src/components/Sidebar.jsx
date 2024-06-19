@@ -16,9 +16,9 @@ const initialTasks = [
   { id: 'DEL8', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF7', Proc: '' }
 ];
 
-const robots = [
-  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF', battery: 50, progress: 45, taskId: 'DEL3' },
-  { id: 'AGF3', mode: 'TO_TASK', type: 'AGF', battery: 50, progress: 45, taskId: 'DEL4' }
+const initialRobots = [
+  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF3', battery: 50, progress: 45, taskId: 'DEL3' },
+  { id: 'AGF3', mode: 'TO_TASK', type: 'AGF4', battery: 50, progress: 45, taskId: 'DEL4' }
 ];
 
 function Sidebar({ robotTimes = [] }) {
@@ -26,6 +26,24 @@ function Sidebar({ robotTimes = [] }) {
   const [showModal, openModal, closeModal] = useModal();
   const [activeFilter, setActiveFilter] = useState(false);
   const [tasks, setTasks] = useState(initialTasks);
+  const [robots, setRobots] = useState(initialRobots);
+
+  // Battery 값 증가 처리
+  useEffect(() => {
+    const batteryInterval = setInterval(() => {
+      setRobots(prevRobots => {
+        return prevRobots.map(robot => {
+          if (robot.battery < 100) {
+            return { ...robot, battery: robot.battery + 3 };
+          } else {
+            return robot; // Battery가 100을 초과할 경우 변경 없음
+          }
+        });
+      });
+    }, 10000); // 10초마다 실행
+
+    return () => clearInterval(batteryInterval);
+  }, []);
 
   // 실시간으로 proc. time 업데이트
   useEffect(() => {
@@ -52,7 +70,7 @@ function Sidebar({ robotTimes = [] }) {
 
   // 렌더링할 콘텐츠 선택
   const renderContent = () => {
-    switch (selectedOption)      {
+    switch (selectedOption) {
       case 'Robot':
         return (
           <div className={styles.robotContent}>
@@ -78,7 +96,7 @@ function Sidebar({ robotTimes = [] }) {
           </div>
         );
     }
-  }
+  };
 
   return (
     <aside className={styles.sidebar}>
@@ -97,4 +115,3 @@ function Sidebar({ robotTimes = [] }) {
 }
 
 export default Sidebar;
-

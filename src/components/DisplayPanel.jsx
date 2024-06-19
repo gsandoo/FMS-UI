@@ -31,27 +31,46 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     },
     {
       id: 'AGF1',
-      path: Array.from({ length: 30 }, () => ({ x: 1500, y: 250 })),
+      path: Array.from({ length: 300 }, () => ({ x: 1500, y: 250 })),
       color: 'blue',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
+
     },
     {
       id: 'AGF2',
-      path: Array.from({ length: 15 }, () => ({ x: 1480, y: 130 })),
+      path: [
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+      ],
       color: 'yellow',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
+
     },
     {
       id: 'AGF3',
-      path: Array.from({ length: 18 }, () => ({ x: 1480, y: 100 })),
+      path:[
+        { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 },
+      ],
       color: 'purple',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
     },
 
     {
@@ -60,7 +79,8 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       color: 'purple',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 130 }
     },
 
     {
@@ -153,8 +173,33 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       // { x: 100, y: 450 }, { x: 1500, y: 450 }, { x: 100, y: 450 },
       // { x: 100, y: 350 }, { x: 1500, y: 350 }, { x: 100, y: 350 },
       // { x: 100, y: 250 }, { x: 1500, y: 250 }, { x: 100, y: 250 },
-    ],
-
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1350, y: 130 }, { x: 1350, y: 900 }
+    // ],
+    // [
+    //   { x: 900, y: 900 }, { x: 900, y: 710 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    
+    ]
   ];
 
 
@@ -325,7 +370,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       const drawRobotsAndPaths = () => {
         if (robots) {
           robots.forEach(robot => {
-            if (!robot.finished) {
+            if (!robot.finished && robot.path && robot.path.length > 0) { // 경로가 존재하고 로봇이 이동 중인 경우
               ctx.beginPath();
               ctx.moveTo(robot.path[0].x, robot.path[0].y);
               robot.path.forEach(point => {
@@ -334,30 +379,49 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
               ctx.strokeStyle = robot.color;
               ctx.lineWidth = 4;
               ctx.stroke();
-
-              const currentPoint = robot.path[robot.currentIndex];
-              const robotWidth = 20;
-              const robotHeight = 20;
-              const rx = currentPoint.x - robotWidth / 2;
-              const ry = currentPoint.y - robotHeight / 2;
-              const borderRadius = 5;
-              ctx.beginPath();
-              ctx.moveTo(rx + borderRadius, ry);
-              ctx.lineTo(rx + robotWidth - borderRadius, ry);
-              ctx.quadraticCurveTo(rx + robotWidth, ry, rx + robotWidth, ry + borderRadius);
-              ctx.lineTo(rx + robotWidth, ry + robotHeight - borderRadius);
-              ctx.quadraticCurveTo(rx + robotWidth, ry + robotHeight, rx + robotWidth - borderRadius, ry + robotHeight);
-              ctx.lineTo(rx + borderRadius, ry + robotHeight);
-              ctx.quadraticCurveTo(rx, ry + robotHeight, rx, ry + robotHeight - borderRadius);
-              ctx.lineTo(rx, ry + borderRadius);
-              ctx.quadraticCurveTo(rx, ry, rx + borderRadius, ry);
-              ctx.closePath();
-              ctx.fillStyle = robot.color;
-              ctx.fill();
+      
+              // currentIndex가 유효한 범위 내에 있는지 확인
+              if (robot.currentIndex < robot.path.length) {
+                const currentPoint = robot.path[robot.currentIndex];
+                
+                if (currentPoint) { // currentPoint가 정의되어 있는지 확인
+                  const robotWidth = 20;
+                  const robotHeight = 20;
+                  const rx = currentPoint.x - robotWidth / 2;
+                  const ry = currentPoint.y - robotHeight / 2;
+                  const borderRadius = 5;
+                  ctx.beginPath();
+                  ctx.moveTo(rx + borderRadius, ry);
+                  ctx.lineTo(rx + robotWidth - borderRadius, ry);
+                  ctx.quadraticCurveTo(rx + robotWidth, ry, rx + robotWidth, ry + borderRadius);
+                  ctx.lineTo(rx + robotWidth, ry + robotHeight - borderRadius);
+                  ctx.quadraticCurveTo(rx + robotWidth, ry + robotHeight, rx + robotWidth - borderRadius, ry + robotHeight);
+                  ctx.lineTo(rx + borderRadius, ry + robotHeight);
+                  ctx.quadraticCurveTo(rx, ry + robotHeight, rx, ry + robotHeight - borderRadius);
+                  ctx.lineTo(rx, ry + borderRadius);
+                  ctx.quadraticCurveTo(rx, ry, rx + borderRadius, ry);
+                  ctx.closePath();
+                  ctx.fillStyle = robot.color;
+                  ctx.fill();
+      
+                  // 로봇이 stayingAt 위치에 도달했을 때
+                  
+                } else {
+                  // currentPoint가 undefined인 경우, 로봇을 완료 상태로 설정
+                  robot.finished = true;
+                }
+              } else {
+                // currentIndex가 경로 길이를 벗어나는 경우, 로봇을 완료 상태로 설정
+                robot.finished = true;
+              }
+            } else if (!robot.finished) {
+              // 로봇이 finished 상태가 아니고 path가 없는 경우에도 currentIndex를 업데이트합니다.
+              robot.currentIndex++;
             }
           });
         }
       };
+      
 
       drawRobotsAndPaths();
 

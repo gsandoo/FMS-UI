@@ -17,9 +17,13 @@ const initialTasks = [
 ];
 
 const initialRobots = [
+  { id: 'AGF1', mode: 'TO_TASK', type: 'AGF3', battery: 91, progress: 9, taskId: 'DEL1' },
   { id: 'AGF3', mode: 'TO_TASK', type: 'AGF3', battery: 89, progress: 45, taskId: 'DEL3' },
   { id: 'AGF4', mode: 'TO_TASK', type: 'AGF4', battery: 21, progress: 45, taskId: 'DEL4' },
-  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF2', battery: 47, progress: 45, taskId: 'DEL2' }
+  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF2', battery: 47, progress: 45, taskId: 'DEL2' },
+  { id: 'AGF5', mode: 'TO_TASK', type: 'AGF5', battery: 98, progress: 5, taskId: 'DEL5' },
+  { id: 'AGF6', mode: 'TO_TASK', type: 'AGF6', battery: 65, progress: 12, taskId: 'DEL6' },
+  { id: 'AGF7', mode: 'TO_TASK', type: 'AGF7', battery: 78, progress: 10, taskId: 'DEL7' }
 ];
 
 function Sidebar({ robotTimes = [] }) {
@@ -34,17 +38,23 @@ function Sidebar({ robotTimes = [] }) {
     const batteryInterval = setInterval(() => {
       setRobots(prevRobots => {
         return prevRobots.map(robot => {
-          if (robot.battery <= 97) {
-            return { ...robot, battery: robot.battery + 3 };
+          if (robot.id === 'AGF3' || robot.id === 'AGF2' || robot.id === 'AGF4') {
+            // AGF3, AGF2, AGF4 로봇은 배터리 증가 및 프로그레스 변경
+            const newBattery = robot.battery <= 97 ? robot.battery + 1 : robot.battery;
+            return { ...robot, battery: newBattery };
           } else {
-            return robot; // Battery가 100을 초과할 경우 변경 없음
+            // 그 외 로봇들은 배터리 감소 및 프로그레스 변경
+            const newBattery = robot.battery >= 3 ? robot.battery - 1 : 0;
+            const newProgress = robot.progress <= 97 ? robot.progress + 2 : 0;
+            return { ...robot, battery: newBattery, progress: newProgress };
           }
         });
       });
-    }, 10000); // 10초마다 실행
-
+    }, 3000); // 10초마다 실행
+  
     return () => clearInterval(batteryInterval);
   }, []);
+  
 
   // 실시간으로 proc. time 업데이트
   useEffect(() => {

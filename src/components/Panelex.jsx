@@ -5,10 +5,11 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
   const [nodes, setNodes] = useState([]);
   const [robots, setRobots] = useState([]);
   const [paths, setPaths] = useState([]);
+  const [structure, setStructure] = useState([]);
+  const [cs, setCs] = useState([]);
   const canvasRef = useRef(null);
   const robotStartTimeRef = useRef({});
   const finishedRobotTimesRef = useRef({});
-  const backgroundImageRef = useRef(null);
 
   const chargeStation = [
     { id: 1, x: 1500, y: 100, color: 'green' },
@@ -18,10 +19,19 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     { id: 5, x: 1500, y: 220, color: 'green' },
   ];
 
+  // 가로는 100 단위, 세로는 50단위
   const dummyRobots = [
     {
       id: 'AGF0',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      path: [
+        { x: 200, y: 130 }, { x: 230, y: 130 }, { x: 250, y: 130 }, { x: 280, y: 130 }, { x: 300, y: 130 },
+        { x: 300, y: 170 }, { x: 300, y: 180 }, { x: 300, y: 200 }, { x: 300, y: 230 }, { x: 300, y: 250 }, 
+        { x: 500, y: 250 }, { x: 510, y: 250 }, { x: 530, y: 250 }, { x: 570, y: 250 }, { x: 590, y: 250 },
+        { x: 600, y: 250 }, { x: 600, y: 290 }, { x: 600, y: 350 }, { x: 600, y: 390 }, { x: 600, y: 420 },
+        { x: 600, y: 450 }, { x: 620, y: 450 }, { x: 640, y: 450 }, { x: 656, y: 450 }, { x: 680, y: 450 },
+
+
+      ],
       color: 'red',
       currentIndex: 0,
       progress: 0,
@@ -29,24 +39,116 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     },
     {
       id: 'AGF1',
-      path: Array.from({ length: 30 }, () => ({ x: 1500, y: 250 })),
+      path: Array.from({ length: 300 }, () => ({ x: 1500, y: 250 })),
       color: 'blue',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
+
     },
     {
       id: 'AGF2',
-      path: Array.from({ length: 15 }, () => ({ x: 1480, y: 130 })),
+      path: [
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
+      ],
       color: 'yellow',
+      currentIndex: 0,
+      progress: 0,
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
+
+    },
+    {
+      id: 'AGF3', // 충전
+      path:[
+        { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 },
+      ],
+      color: 'purple',
+      currentIndex: 0,
+      progress: 0,
+      finished: false,
+      stayingAt: { x: 1480, y: 100 }
+    },
+
+    {
+      id: 'AGF4',
+      path: [
+        { x: 630, y: 130 }, { x: 630, y: 150 }, { x: 630, y: 160 }, { x: 630, y: 190 }, { x: 630, y: 220 }, 
+        { x: 630, y: 230 },  { x: 600, y: 230 },  { x: 580, y: 230 },  { x: 530, y: 230 },  { x: 490, y: 230 },  { x: 450, y: 230 }, 
+        { x: 430, y: 230 }, { x: 430, y: 260 }, { x: 430, y: 290 }, { x: 430, y: 330 }, { x: 430, y: 360 },
+        { x: 430, y: 390 }, { x: 430, y: 420 }, { x: 430, y: 450 }, { x: 430, y: 480 }, { x: 430, y: 490 },
+        { x: 430, y: 500 }, { x: 430, y: 530 }, { x: 430, y: 560 }, { x: 430, y: 610 }, { x: 430, y: 650 }, { x: 430, y: 680 }, 
+        { x: 430, y: 700 }, { x: 460, y: 700 }, { x: 490, y: 700 }, { x: 520, y: 700 }, { x: 550, y: 700 }, 
+        { x: 610, y: 700 }, { x: 650, y: 700 }, { x: 680, y: 700 }, { x: 710, y: 700 }, { x: 740, y: 700 }, { x: 770, y: 700 },  
+        { x: 800, y: 700 },  { x: 800, y: 700 },  { x: 800, y: 700 },  { x: 800, y: 700 },  { x: 800, y: 700 },
+      ],
+      color: 'orange',
+      currentIndex: 0,
+      progress: 0,
+      finished: false,
+      stayingAt: { x: 1480, y: 130 }
+    },
+
+    {
+      id: 'AGF5',
+      path: [{ x: 970, y: 860 }, { x: 970, y: 600 }, { x: 450, y: 600 }, { x: 450, y: 300 }, { x: 200, y: 300 }, { x: 200, y: 150 }],
+      color: 'brown',
       currentIndex: 0,
       progress: 0,
       finished: false
     },
+
     {
-      id: 'AGF3',
-      path: Array.from({ length: 18 }, () => ({ x: 1480, y: 100 })),
-      color: 'purple',
+      id: 'AGF6',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF7',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF8',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF9',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
+      currentIndex: 0,
+      progress: 0,
+      finished: false
+    },
+
+    {
+      id: 'AGF10',
+      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      color: 'red',
       currentIndex: 0,
       progress: 0,
       finished: false
@@ -55,63 +157,128 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
 
   const dummyPaths = [
     [
+      
       // path 1
       { x: 200, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 }, { x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
-    ],
+      // path 2
+      { x: 1400, y: 100 }, { x: 1400, y: 130 }, { x: 1500, y: 130 },
+      // path 3
+      { x: 1400, y: 130 }, { x: 1400, y: 160 }, { x: 1500, y: 160 },
+      // path 4
+      { x: 1400, y: 160 }, { x: 1400, y: 190 }, { x: 1500, y: 190 },
+      // path 5
+      { x: 1400, y: 190 }, { x: 1400, y: 220 }, { x: 1500, y: 220 },
+      
+      // // path 8 (세로)
+      // { x: 1200, y: 130 }, { x: 1100, y: 130 }, { x: 1100, y: 950 },
+      // { x: 1100, y: 130 }, { x: 1000, y: 130 }, { x: 1000, y: 950 },
+      // { x: 1000, y: 130 }, { x: 900, y: 130 }, { x: 900, y: 950 },
+      // { x: 900, y: 130 }, { x: 800, y: 130 }, { x: 800, y: 950 },
+      // { x: 800, y: 130 }, { x: 700, y: 130 }, { x: 700, y: 950 },
+      // { x: 700, y: 130 }, { x: 600, y: 130 }, { x: 600, y: 950 },
+      // { x: 600, y: 130 }, { x: 500, y: 130 }, { x: 500, y: 950 },
+      // { x: 500, y: 130 }, { x: 400, y: 130 }, { x: 400, y: 950 },
+      // { x: 400, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 950 },
+      // { x: 300, y: 130 }, { x: 200, y: 130 }, { x: 200, y: 950 },
+      // { x: 200, y: 130 }, { x: 100, y: 130 }, { x: 100, y: 950 },
+
+      // // path 9 (가로)
+      // { x: 100, y: 850 }, { x: 1500, y: 850 }, { x: 100, y: 850 },
+      // { x: 100, y: 750 }, { x: 1500, y: 750 }, { x: 100, y: 750 },
+      // { x: 100, y: 650 }, { x: 1500, y: 650 }, { x: 100, y: 650 },
+      // { x: 100, y: 550 }, { x: 1500, y: 550 }, { x: 100, y: 550 },
+      // { x: 100, y: 450 }, { x: 1500, y: 450 }, { x: 100, y: 450 },
+      // { x: 100, y: 350 }, { x: 1500, y: 350 }, { x: 100, y: 350 },
+      // { x: 100, y: 250 }, { x: 1500, y: 250 }, { x: 100, y: 250 },
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1350, y: 130 }, { x: 1350, y: 900 }
+    // ],
+    // [
+    //   { x: 900, y: 900 }, { x: 900, y: 710 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    // [
+    //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
+    // ],
+    
+    ]
   ];
 
-  const drawCanvas = (ctx) => {
-    // Clear the canvas
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  
-    // Draw the background image if it exists
-    if (backgroundImageRef.current) {
-      ctx.drawImage(backgroundImageRef.current, 0, 0, ctx.canvas.width, ctx.canvas.height);
-    }
-  
-    // Draw paths
-    drawPaths(ctx);
-  
-    // Draw nodes
-    drawNodes(ctx);
-  
-    // Draw robots
-    if (robots) {
-      robots.forEach(robot => {
-        if (!robot.finished) {
-          ctx.beginPath();
-          ctx.moveTo(robot.path[0].x, robot.path[0].y);
-          robot.path.forEach(point => {
-            ctx.lineTo(point.x, point.y);
-          });
-          ctx.strokeStyle = robot.color;
-          ctx.lineWidth = 2;
-          ctx.stroke();
-  
-          const currentPoint = robot.path[robot.currentIndex];
-          const robotWidth = 20;
-          const robotHeight = 20;
-          const rx = currentPoint.x - robotWidth / 2;
-          const ry = currentPoint.y - robotHeight / 2;
-          const borderRadius = 5;
-          ctx.beginPath();
-          ctx.moveTo(rx + borderRadius, ry);
-          ctx.lineTo(rx + robotWidth - borderRadius, ry);
-          ctx.quadraticCurveTo(rx + robotWidth, ry, rx + robotWidth, ry + borderRadius);
-          ctx.lineTo(rx + robotWidth, ry + robotHeight - borderRadius);
-          ctx.quadraticCurveTo(rx + robotWidth, ry + robotHeight, rx + robotWidth - borderRadius, ry + robotHeight);
-          ctx.lineTo(rx + borderRadius, ry + robotHeight);
-          ctx.quadraticCurveTo(rx, ry + robotHeight, rx, ry + robotHeight - borderRadius);
-          ctx.lineTo(rx, ry + borderRadius);
-          ctx.quadraticCurveTo(rx, ry, rx + borderRadius, ry);
-          ctx.closePath();
-          ctx.fillStyle = robot.color;
-          ctx.fill();
-        }
-      });
-    }
-  };
 
+  const dummyStructure = [
+    [
+      // structure 1
+      { x: 1000, y: 600 }, { x: 1200, y: 600 }, { x: 1200, y: 700 }, { x: 1000, y: 700 }, { x: 1000, y: 600 },
+    ],
+    [
+      // structure 2
+      { x: 200, y: 400 }, { x: 200, y: 600 }, { x: 400, y: 600 }, { x: 400, y: 400 }, { x: 200, y: 400 },
+    ],
+    [
+      // structure 3
+      { x: 300, y: 800 }, { x: 600, y: 800 }, { x: 600, y: 830 }, { x: 300, y: 830 }, { x: 300, y: 800 },
+    ],
+    [
+      // structure 4
+      { x: 1200, y: 900 }, { x: 1200, y: 600 }, { x: 1300, y: 600 }, { x: 1300, y: 900 }, { x: 1200, y: 900 },
+    ],
+    [
+      // structure 5
+      { x: 700, y: 200 }, { x: 760, y: 200 }, { x: 760, y: 220 }, { x: 700, y: 220 }, { x: 700, y: 200 },
+    ],
+
+    [
+      // structure 6
+      { x: 1600, y: 500 }, { x: 1600, y: 650 }, { x: 1450, y: 650 }, { x: 1450, y: 500 }, { x: 1600, y: 500 },
+    ],
+
+    [
+      // structure 7
+      { x: 800, y: 800 }, { x: 840, y: 800 }, { x: 840, y: 1000 }, { x: 800, y: 1000 }, { x: 800, y: 800 },
+    ],
+
+    [
+      // structure 8
+      { x: 900, y: 350 }, { x: 1150, y: 350 }, { x: 1150, y: 380 }, { x: 900, y: 380 }, { x: 900, y: 350 },
+    ],
+
+    [
+      // structure 9
+      { x: 700, y: 200 }, { x: 760, y: 200 }, { x: 760, y: 220 }, { x: 700, y: 220 }, { x: 700, y: 200 },
+    ],
+
+    [
+      // structure 10
+      { x: 700, y: 200 }, { x: 760, y: 200 }, { x: 760, y: 220 }, { x: 700, y: 220 }, { x: 700, y: 200 },
+    ],
+
+  ];
+
+
+  const charge = [
+    [
+      // structure 1
+      { x: 1450, y: 70 }, { x: 1550, y: 70 }, { x: 1550, y: 300 }, { x: 1450, y: 300 }, { x: 1450, y: 70 },
+    ],
+   
+  ];
+   
+  
   const drawNodes = (ctx, nodeSize = 10) => {
     nodes.forEach(node => {
       ctx.beginPath();
@@ -121,6 +288,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     });
   };
 
+  // 로봇 path 그리기
   const drawPaths = (ctx) => {
     paths.forEach(path => {
       ctx.beginPath();
@@ -129,6 +297,34 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
         ctx.lineTo(point.x, point.y);
       });
       ctx.strokeStyle = 'grey';
+      ctx.lineWidth = 10;
+      ctx.stroke();
+    });
+  };
+
+
+  const drawStructure = (ctx) => {
+    structure.forEach(path => {
+      ctx.beginPath();
+      ctx.moveTo(path[0].x, path[0].y);
+      path.forEach(point => {
+        ctx.lineTo(point.x, point.y);
+      });
+      ctx.strokeStyle = 'darkred';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    });
+  };
+
+
+  const drawChargeStation = (ctx) => {
+    cs.forEach(path => {
+      ctx.beginPath();
+      ctx.moveTo(path[0].x, path[0].y);
+      path.forEach(point => {
+        ctx.lineTo(point.x, point.y);
+      });
+      ctx.strokeStyle = 'yellowgreen';
       ctx.lineWidth = 5;
       ctx.stroke();
     });
@@ -139,6 +335,8 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       setNodes(chargeStation);
       setRobots(dummyRobots);
       setPaths(dummyPaths);
+      setStructure(dummyStructure);
+      setCs(charge);
       dummyRobots.forEach(robot => {
         robotStartTimeRef.current[robot.id] = Date.now();
       });
@@ -163,14 +361,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
         canvas.width = rect.width * window.devicePixelRatio;
         canvas.height = rect.height * window.devicePixelRatio;
         ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-        // Load the background image
-        const backgroundImage = new Image();
-        backgroundImage.src = '/back.png'; // Ensure this path is correct
-        backgroundImage.onload = () => {
-          backgroundImageRef.current = backgroundImage;
-          drawCanvas(ctx); // Pass the context to drawCanvas
-        };
+        
       }
     };
 
@@ -178,6 +369,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     resizeCanvas();
 
     return () => window.removeEventListener('resize', resizeCanvas);
+ 
   }, []);
 
   useEffect(() => {
@@ -185,8 +377,76 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      drawCanvas(ctx); // Use the drawCanvas function to render everything
+      drawPaths(ctx);
+      drawNodes(ctx);
+      drawStructure(ctx);
+      drawChargeStation(ctx);
+
+      const drawRobotsAndPaths = () => {
+        if (robots) {
+          robots.forEach(robot => {
+            if (!robot.finished && robot.path && robot.path.length > 0) { // 경로가 존재하고 로봇이 이동 중인 경우
+              ctx.beginPath();
+              ctx.moveTo(robot.path[0].x, robot.path[0].y);
+              robot.path.forEach(point => {
+                ctx.lineTo(point.x, point.y);
+              });
+              ctx.strokeStyle = robot.color;
+              ctx.lineWidth = 4;
+              ctx.stroke();
+      
+              // currentIndex가 유효한 범위 내에 있는지 확인
+              if (robot.currentIndex < robot.path.length) {
+                const currentPoint = robot.path[robot.currentIndex];
+                
+                if (currentPoint) { // currentPoint가 정의되어 있는지 확인
+                  const robotWidth = 20;
+                  const robotHeight = 20;
+                  const rx = currentPoint.x - robotWidth / 2;
+                  const ry = currentPoint.y - robotHeight / 2;
+                  const borderRadius = 5;
+                  ctx.beginPath();
+                  ctx.moveTo(rx + borderRadius, ry);
+                  ctx.lineTo(rx + robotWidth - borderRadius, ry);
+                  ctx.quadraticCurveTo(rx + robotWidth, ry, rx + robotWidth, ry + borderRadius);
+                  ctx.lineTo(rx + robotWidth, ry + robotHeight - borderRadius);
+                  ctx.quadraticCurveTo(rx + robotWidth, ry + robotHeight, rx + robotWidth - borderRadius, ry + robotHeight);
+                  ctx.lineTo(rx + borderRadius, ry + robotHeight);
+                  ctx.quadraticCurveTo(rx, ry + robotHeight, rx, ry + robotHeight - borderRadius);
+                  ctx.lineTo(rx, ry + borderRadius);
+                  ctx.quadraticCurveTo(rx, ry, rx + borderRadius, ry);
+                  ctx.closePath();
+                  ctx.fillStyle = robot.color;
+                  ctx.fill();
+      
+                  // 로봇이 stayingAt 위치에 도달했을 때 
+                  if (robot.stayingAt) {
+                  const { x, y } = robot.stayingAt;
+                  if(currentPoint.x === x && currentPoint.y === y){
+                    console.log(`${robot.id}가 위치 ${x}, ${y}에 도달했습니다.`);
+
+                  }
+                } else {
+                  // currentPoint가 undefined인 경우, 로봇을 완료 상태로 설정
+                  robot.finished = true;
+                }
+              }
+              } else {
+                // currentIndex가 경로 길이를 벗어나는 경우, 로봇을 완료 상태로 설정
+                robot.finished = true;
+              }
+            } else if (!robot.finished) {
+              // 로봇이 finished 상태가 아니고 path가 없는 경우에도 currentIndex를 업데이트합니다.
+              robot.currentIndex++;
+            }
+          });
+        }
+      };
+      
+
+      drawRobotsAndPaths();
 
       const newRobotTimes = robots.map(robot => {
         if (!robot.finished) {

@@ -2,7 +2,7 @@ import React from 'react';
 import Robot from './Robot';
 import styles from '../styles/RobotList.module.css';
 
-function RobotList({ robots }) {
+const RobotList = ({ robots }) => {
   return (
     <div className={styles.robotListContainer}>
       {robots.map((robot, index) => (
@@ -12,6 +12,6 @@ function RobotList({ robots }) {
       ))}
     </div>
   );
-}
+};
 
 export default RobotList;

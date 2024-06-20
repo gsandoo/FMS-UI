@@ -7,7 +7,7 @@ import useModal from '../hooks/useModal';
 
 const initialTasks = [
   { id: 'DEL1', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF0', Proc: '' },
-  { id: 'DEL2', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF1', Proc: '' },
+  { id: 'DEL2', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF1', Proc: '' },
   { id: 'DEL3', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF2', Proc: '' },
   { id: 'DEL4', type: 'DELIVERY', status: 'CHARGING', robotId: 'AGF3', Proc: '' },
   { id: 'DEL5', type: 'DELIVERY', status: 'ACTIVE', robotId: 'AGF4', Proc: '' },
@@ -17,8 +17,9 @@ const initialTasks = [
 ];
 
 const initialRobots = [
-  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF3', battery: 50, progress: 45, taskId: 'DEL3' },
-  { id: 'AGF3', mode: 'TO_TASK', type: 'AGF4', battery: 50, progress: 45, taskId: 'DEL4' }
+  { id: 'AGF3', mode: 'TO_TASK', type: 'AGF3', battery: 89, progress: 45, taskId: 'DEL3' },
+  { id: 'AGF4', mode: 'TO_TASK', type: 'AGF4', battery: 21, progress: 45, taskId: 'DEL4' },
+  { id: 'AGF2', mode: 'TO_TASK', type: 'AGF2', battery: 47, progress: 45, taskId: 'DEL2' }
 ];
 
 function Sidebar({ robotTimes = [] }) {
@@ -33,7 +34,7 @@ function Sidebar({ robotTimes = [] }) {
     const batteryInterval = setInterval(() => {
       setRobots(prevRobots => {
         return prevRobots.map(robot => {
-          if (robot.battery < 100) {
+          if (robot.battery <= 97) {
             return { ...robot, battery: robot.battery + 3 };
           } else {
             return robot; // Battery가 100을 초과할 경우 변경 없음
@@ -64,6 +65,11 @@ function Sidebar({ robotTimes = [] }) {
     const updatedTasks = tasks.filter(task => task.id !== taskId);
     setTasks(updatedTasks);
   };
+
+ // AddRobotModal에서 새로운 로봇 추가하는 함수
+ const addRobot = (newRobot) => {
+  setRobots((prevRobots) => [...prevRobots, newRobot]);
+};
 
   // 체크박스 상태 변경 핸들러
   const handleActiveCheckboxChange = (e) => setActiveFilter(e.target.checked);
@@ -109,7 +115,7 @@ function Sidebar({ robotTimes = [] }) {
         {renderContent()}
       </div>
 
-      {showModal && <AddModal selectedOption={selectedOption} handleClose={closeModal} />}
+      {showModal && <AddModal selectedOption={selectedOption} handleClose={closeModal} addRobot={addRobot} />}
     </aside>
   );
 }

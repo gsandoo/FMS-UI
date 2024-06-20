@@ -23,7 +23,15 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
   const dummyRobots = [
     {
       id: 'AGF0',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
+      path: [
+        { x: 160, y: 130 }, { x: 180, y: 130 }, { x: 210, y: 130 }, { x: 230, y: 130 }, { x: 250, y: 130 },
+        { x: 250, y: 170 }, { x: 250, y: 200 }, { x: 250, y: 250 }, { x: 250, y: 300 }, { x: 250, y: 330 }, 
+        { x: 270, y: 330 },  { x: 270, y: 330 }, { x: 350, y: 330 }, { x: 450, y: 330 }, { x: 550, y: 330 },
+        { x: 550, y: 430 }, { x: 550, y: 480 }, { x: 550, y: 530 }, { x: 550, y: 580 }, { x: 550, y: 630 },
+        { x: 550, y: 680 }, { x: 550, y: 730 }, { x: 500, y: 730 }, { x: 400, y: 730 }, { x: 300, y: 730 }, { x: 250, y: 730 },
+        { x: 200, y: 730 }, { x: 150, y: 730 }, { x: 150, y: 730 },
+
+      ],
       color: 'red',
       currentIndex: 0,
       progress: 0,
@@ -31,29 +39,16 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     },
     {
       id: 'AGF1',
-      path: Array.from({ length: 300 }, () => ({ x: 1500, y: 250 })),
+      path: Array.from({ length: 300 }, () => ({ x: 1480, y: 220 })),
       color: 'blue',
       currentIndex: 0,
       progress: 0,
       finished: false,
       stayingAt: { x: 1480, y: 100 }
-
     },
     {
       id: 'AGF2',
-      path: [
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-        { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 }, { x: 1480, y: 130 }, { x: 1480, y: 130 },{ x: 1480, y: 130 },
-      ],
+      path:  Array.from({ length: 300 }, () => ({ x: 1480, y: 130 })),
       color: 'yellow',
       currentIndex: 0,
       progress: 0,
@@ -63,9 +58,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     },
     {
       id: 'AGF3',
-      path:[
-        { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 }, { x: 1480, y: 100 }, { x: 1480, y: 100 },{ x: 1480, y: 100 },
-      ],
+      path: Array.from({ length: 300 }, () => ({ x: 1480, y: 100 })),
       color: 'purple',
       currentIndex: 0,
       progress: 0,
@@ -75,8 +68,13 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
 
     {
       id: 'AGF4',
-      path: [{ x: 630, y: 130 }, { x: 630, y: 230 }, { x: 430, y: 230 }, { x: 430, y: 500 }, { x: 430, y: 700 }, { x: 800, y: 700 }],
-      color: 'purple',
+      path: [
+        { x: 1480, y: 160 }, { x: 1400, y: 160 }, { x: 1400, y: 130 }, { x: 1350, y: 130 },
+        { x: 1350, y: 150 }, { x: 1350, y: 200 }, { x: 1350, y: 250 }, { x: 1350, y: 300 }, { x: 1350, y: 350 },   
+        { x: 1350, y: 400 }, { x: 1350, y: 500 }, { x: 1350, y: 600 }, { x: 1350, y: 700 }, { x: 1350, y: 850 }, 
+        { x: 1350, y: 900 }, { x: 1350, y: 920 }, { x: 1350, y: 980 }, { x: 1350, y: 1020 },
+      ],
+      color: 'orange',
       currentIndex: 0,
       progress: 0,
       finished: false,
@@ -85,17 +83,33 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
 
     {
       id: 'AGF5',
-      path: [{ x: 970, y: 860 }, { x: 970, y: 600 }, { x: 450, y: 600 }, { x: 450, y: 300 }, { x: 200, y: 300 }, { x: 200, y: 150 }],
+      path: [
+        { x: 1150, y: 1030 }, { x: 1150, y: 980 }, { x: 1150, y: 930 }, { x: 1150, y: 860 }, { x: 1150, y: 800 }, 
+        { x: 1150, y: 730 }, 
+        { x: 1050, y: 730 }, { x: 1000, y: 730 }, { x: 950, y: 730 }, { x: 900, y: 730 }, { x: 850, y: 730 }, { x: 800, y: 730 }, 
+        { x: 800, y: 700 }, { x: 800, y: 650 }, { x: 800, y: 600 }, { x: 800, y: 550 }, { x: 800, y: 530 }, 
+        { x: 850, y: 530 }, { x: 950, y: 530 }, { x: 1050, y: 530 }, { x: 1150, y: 530 }, { x: 1250, y: 530 }, { x: 1350, y: 530 }, 
+        { x: 1350, y: 500 }, { x: 1350, y: 450 }, { x: 1350, y: 400 }, { x: 1350, y: 350 },
+        { x: 1500, y: 350 },  { x: 1600, y: 350 },   
+      ],
       color: 'brown',
       currentIndex: 0,
       progress: 0,
-      finished: false
+      finished: false,
+      stayingAt: { x: 1480, y: 130 }
     },
 
     {
       id: 'AGF6',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
-      color: 'red',
+      path: [
+        { x: 155, y: 1020 }, { x: 155, y: 980 }, { x: 155, y: 960 }, { x: 155, y: 930 }, 
+        { x: 230, y: 930 }, { x: 270, y: 930 }, { x: 330, y: 930 }, { x: 380, y: 930 },
+        { x: 400, y: 930 }, { x: 440, y: 930 }, { x: 500, y: 930 }, { x: 580, y: 930 },
+        { x: 610, y: 930 }, { x: 630, y: 930 }, { x: 680, y: 930 }, { x: 700, y: 930 },
+        { x: 700, y: 960 }, { x: 700, y: 1000 }, { x: 700, y: 1020 },
+
+      ],
+      color: 'skyblue',
       currentIndex: 0,
       progress: 0,
       finished: false
@@ -103,35 +117,15 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
 
     {
       id: 'AGF7',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
-      color: 'red',
-      currentIndex: 0,
-      progress: 0,
-      finished: false
-    },
-
-    {
-      id: 'AGF8',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
-      color: 'red',
-      currentIndex: 0,
-      progress: 0,
-      finished: false
-    },
-
-    {
-      id: 'AGF9',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
-      color: 'red',
-      currentIndex: 0,
-      progress: 0,
-      finished: false
-    },
-
-    {
-      id: 'AGF10',
-      path: [{ x: 200, y: 130 }, { x: 300, y: 130 }, { x: 300, y: 250 }, { x: 500, y: 250 }, { x: 600, y: 250 }, { x: 600, y: 450 }],
-      color: 'red',
+      path: [
+        { x: 400, y: 1020 } , { x: 400, y: 980 } , { x: 400, y: 930 } , 
+        { x: 450, y: 930 }  , { x: 500, y: 930 } , { x: 550, y: 930 } , { x: 600, y: 930 }  , { x: 650, y: 930 } , { x: 700, y: 930 } ,
+        { x: 700, y: 870 }  , { x: 700, y: 800 } , { x: 700, y: 730 } , 
+        { x: 650, y: 730 }  , { x: 600, y: 730 } , { x: 550, y: 730 } , { x: 500, y: 730 } , { x: 450, y: 730 } , { x: 400, y: 730 } ,
+        { x: 350, y: 730 } , { x: 300, y: 730 } , { x: 250, y: 730 } , { x: 200, y: 730 } , { x: 150, y: 730 } ,
+        { x: 150, y: 800 } , { x: 150, y: 850 } , { x: 150, y: 920 } , { x: 150, y: 980 } , { x: 150, y: 1030 } ,
+      ],
+      color: 'navy',
       currentIndex: 0,
       progress: 0,
       finished: false
@@ -142,7 +136,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     [
       
       // path 1
-      { x: 200, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 }, { x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
+      { x: 150, y: 130 }, { x: 400, y: 130 }, { x: 600, y: 130 }, { x: 800, y: 130 }, { x: 1000, y: 130 }, { x: 1400, y: 130 }, { x: 1400, y: 100 }, { x: 1500, y: 100 },
       // path 2
       { x: 1400, y: 100 }, { x: 1400, y: 130 }, { x: 1500, y: 130 },
       // path 3
@@ -198,7 +192,39 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     // [
     //   { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1500, y: 350 }
     // ],
-    
+    ],
+    [
+      { x: 1200, y: 130 }, { x: 1200, y: 350 }, { x: 1600, y: 350 }
+    ],
+    [
+      { x: 1100, y: 130 }, { x: 1100, y: 250 }, { x: 1200, y: 250 }
+    ],
+    [
+      { x: 1000, y: 130 }, { x: 1000, y: 330 }, { x: 800, y: 330 }, { x: 800, y: 730 }, { x: 1150, y: 730 }, { x: 1150, y: 1030 }
+    ],
+    [
+      { x: 1350, y: 130 }, { x: 1350, y: 1030 }, 
+    ],
+    [
+       {x : 550, y: 130} ,{ x: 550, y: 730 }, { x: 700, y: 730 }, { x: 700, y: 1030 } , { x: 700, y: 930 }, { x: 150, y: 930 } , { x: 400, y: 930 } ,{ x: 400, y: 1030 }  
+    ],
+    [
+      {x : 550, y: 130} ,{ x: 550, y: 730 }, { x: 800, y: 730 }, { x: 150, y: 730 } , { x: 550, y: 730 }, { x: 550, y: 530 }, { x: 1350, y: 530 }
+    ],
+    [
+     {x : 900, y: 130} ,{ x: 900, y: 330 }, {x: 150 , y: 330} 
+    ],
+    [
+      {x : 450, y: 130} ,{x : 450, y: 330}
+    ],
+    [
+      {x : 350, y: 130} ,{x : 350, y: 330}
+    ],
+    [
+      {x : 250, y: 130} ,{x : 250, y: 330}
+    ],
+    [
+      {x : 155, y: 130}, {x : 155, y: 1030}
     ]
   ];
 
@@ -210,7 +236,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
     ],
     [
       // structure 2
-      { x: 200, y: 400 }, { x: 200, y: 600 }, { x: 400, y: 600 }, { x: 400, y: 400 }, { x: 200, y: 400 },
+      { x: 200, y: 380 }, { x: 200, y: 700 }, { x: 500, y: 700 }, { x: 500, y: 380 }, { x: 200, y: 380 },
     ],
     [
       // structure 3
@@ -237,7 +263,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
 
     [
       // structure 8
-      { x: 900, y: 350 }, { x: 1150, y: 350 }, { x: 1150, y: 380 }, { x: 900, y: 380 }, { x: 900, y: 350 },
+      { x: 900, y: 400 }, { x: 1150, y: 400 }, { x: 1150, y: 440 }, { x: 900, y: 440 }, { x: 900, y: 400 },
     ],
 
     [
@@ -256,7 +282,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
   const charge = [
     [
       // structure 1
-      { x: 1450, y: 70 }, { x: 1550, y: 70 }, { x: 1550, y: 300 }, { x: 1450, y: 300 }, { x: 1450, y: 70 },
+      { x: 1450, y: 70 }, { x: 1550, y: 70 }, { x: 1550, y: 260 }, { x: 1450, y: 260 }, { x: 1450, y: 70 },
     ],
    
   ];
@@ -280,7 +306,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
         ctx.lineTo(point.x, point.y);
       });
       ctx.strokeStyle = 'grey';
-      ctx.lineWidth = 10;
+      ctx.lineWidth = 20;
       ctx.stroke();
     });
   };
@@ -294,7 +320,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
         ctx.lineTo(point.x, point.y);
       });
       ctx.strokeStyle = 'darkred';
-      ctx.lineWidth = 5;
+      ctx.lineWidth = 10;
       ctx.stroke();
     });
   };
@@ -377,7 +403,7 @@ const DisplayPanel = ({ setRobotTimes, setDeleteRobot }) => {
                 ctx.lineTo(point.x, point.y);
               });
               ctx.strokeStyle = robot.color;
-              ctx.lineWidth = 4;
+              ctx.lineWidth = 6;
               ctx.stroke();
       
               // currentIndex가 유효한 범위 내에 있는지 확인
